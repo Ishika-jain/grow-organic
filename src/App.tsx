@@ -28,11 +28,14 @@ function App() {
       setErrmsg("invalid email")
     }
     else  
+    {
       setValid(true);
-    localStorage.setItem('name', JSON.stringify(name));
-    localStorage.setItem('email', JSON.stringify(email));
-    localStorage.setItem('phonenumber', JSON.stringify(phonenumber));
-    navigate("/page2");
+      localStorage.setItem('name', JSON.stringify(name));
+      localStorage.setItem('email', JSON.stringify(email));
+      localStorage.setItem('phonenumber', JSON.stringify(phonenumber));
+      navigate("/page2");
+
+    }
   }
 
   const handlename = (e : React.ChangeEvent<HTMLInputElement>) =>{
