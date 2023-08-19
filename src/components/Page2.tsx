@@ -13,6 +13,8 @@ const Page2 = () => {
           <Data />
         </div>
         <div className="p-10">
+        <div className="text-xl font-semibold text-center p-5" >  Checkbox Hierarchy </div>
+
           <Departments />
         </div>
       </div>
