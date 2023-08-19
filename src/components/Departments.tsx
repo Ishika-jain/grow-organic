@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Checkbox } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 const Departments = () => {
-  const departmentData = [
+  interface DepartmentData {
+    department: string;
+    sub_departments: string[];
+  }
+  
+  interface DepartmentState {
+    showSubDept: boolean;
+    deptSelected: boolean;
+    subDeptSelected: boolean[];
+  }
+
+  const departmentData: DepartmentData[] = [
     {
       department: "customer_service",
       sub_departments: ["support", "customer_success"],
@@ -15,7 +26,7 @@ const Departments = () => {
     },
   ];
 
-  const [deptState, setDeptState] = useState(
+  const [deptState, setDeptState] = useState<DepartmentState[]>(
     departmentData.map((dept) => ({
       showSubDept: false,
       deptSelected: false,
@@ -23,7 +34,7 @@ const Departments = () => {
     }))
   );
 
-  const toggleShowSubDept = (deptIndex) => {
+  const toggleShowSubDept = (deptIndex: number) => {
     setDeptState((prevState) => {
       const updatedState = [...prevState];
       updatedState[deptIndex].showSubDept = !updatedState[deptIndex].showSubDept;
@@ -31,7 +42,7 @@ const Departments = () => {
     });
   };
 
-  const toggleDeptSelected = (deptIndex) => {
+  const toggleDeptSelected = (deptIndex: number) => {
     setDeptState((prevState) => {
       const updatedState = [...prevState];
       updatedState[deptIndex].deptSelected = !updatedState[deptIndex].deptSelected;
@@ -42,7 +53,7 @@ const Departments = () => {
     });
   };
 
-  const toggleSubDeptSelected = (deptIndex, subIndex) => {
+  const toggleSubDeptSelected = (deptIndex:number, subIndex: number) => {
     setDeptState((prevState) => {
       const updatedState = [...prevState];
       updatedState[deptIndex].subDeptSelected[subIndex] = !updatedState[deptIndex].subDeptSelected[subIndex];

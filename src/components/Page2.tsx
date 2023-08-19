@@ -2,7 +2,7 @@ import Data from "./Data";
 import Departments from "./Departments";
 
 const Page2 = () => {
-  var name = localStorage.getItem("name");
+  const name = localStorage.getItem("name");
 
   return (
     <div className="h-screen justify-center items-center">

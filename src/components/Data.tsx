@@ -14,7 +14,7 @@ const Data = () => {
     const url = "https://jsonplaceholder.typicode.com/posts"
     try{
       const response = await fetch(url);
-      const ans = await response.json();
+      const ans: UserData[] = await response.json();
       setRows(ans);
     }
     catch(err){

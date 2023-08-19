@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useNavigate} from "react-router-dom";
 
 function App() {
-  const [name, setName] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [valid, setValid] = useState(false);
-  const [errmsg, setErrmsg] = useState("");
+  const [name, setName] = useState<string>("");
+  const [phonenumber, setPhonenumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [valid, setValid] = useState<boolean>(false);
+  const [errmsg, setErrmsg] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -35,15 +35,15 @@ function App() {
     navigate("/page2");
   }
 
-  const handlename = (e : any) =>{
+  const handlename = (e : React.ChangeEvent<HTMLInputElement>) =>{
     setName(e.target.value);
   }
 
-  const handlephonenumber = (e : any) =>{
+  const handlephonenumber = (e : React.ChangeEvent<HTMLInputElement>) =>{
     setPhonenumber(e.target.value);
   }
 
-  const handleemail = (e : any) =>{
+  const handleemail = (e : React.ChangeEvent<HTMLInputElement>) =>{
     setEmail(e.target.value);
   }
   return (
