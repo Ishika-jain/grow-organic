@@ -1,22 +1,57 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Box, Button } from "@mui/material";
 import { useState } from "react";
+import { useNavigate} from "react-router-dom";
 
 function App() {
   const [name, setName] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
   const [email, setEmail] = useState("");
+  const [valid, setValid] = useState(false);
+  const [errmsg, setErrmsg] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = ()=>{
-    console.log(name);
-    console.log(phonenumber);
-    console.log(email);
+    if (name==""||phonenumber==""||email=="")
+    {
+      setValid(false);
+      setErrmsg("details required")
+    }
+    else if (!/^\d{10}$/.test(phonenumber))
+    {
+      setValid(false);
+      setErrmsg("invalid phone number")
+    }
+    else if (!/\S+@\S+\.\S+/.test(email))
+    {
+      setValid(false);
+      setErrmsg("invalid email")
+    }
+    else  
+      setValid(true);
+    localStorage.setItem('name', JSON.stringify(name));
+    localStorage.setItem('email', JSON.stringify(email));
+    localStorage.setItem('phonenumber', JSON.stringify(phonenumber));
+    navigate("/page2");
   }
 
-  return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-red-300">
-      <h1 className="text-3xl font-bold text-red-600 mb-4"> Form </h1>
+  const handlename = (e : any) =>{
+    setName(e.target.value);
+  }
 
-      <div className="bg-pinkish p-6 rounded-lg shadow-md w-80">
+  const handlephonenumber = (e : any) =>{
+    setPhonenumber(e.target.value);
+  }
+
+  const handleemail = (e : any) =>{
+    setEmail(e.target.value);
+  }
+  return (
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold mb-4"> Register </h1>
+        <Box sx={{padding: 6, borderRadius: 10, boxShadow: 10, width: 480}}>
+
+       
         <TextField
           id="name"
           label="Enter your name"
@@ -24,7 +59,7 @@ function App() {
           fullWidth
           className="mb-4"
           value={name}
-          onChange={(e)=>{setName(e.target.value)}}
+          onChange={handlename}
           sx={{marginBottom: 2}}
 
         />
@@ -35,7 +70,7 @@ function App() {
           fullWidth
           className="mb-4"
           value={phonenumber}
-          onChange={(e)=>{setPhonenumber(e.target.value)}}
+          onChange={handlephonenumber}
           sx={{marginBottom: 2}}
 
         />
@@ -46,13 +81,14 @@ function App() {
           fullWidth
           className="mb-4"
           value={email}
-          onChange={(e)=>{setEmail(e.target.value)}}
+          onChange={handleemail}
           sx={{marginBottom: 2}}
         />
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant="contained" onClick={handleSubmit} fullWidth>
           Submit
         </Button>
-      </div>
+        </Box>
+        <div className="text-3xl font-bold mt-4">{valid?"Details Submitted Successfully":errmsg}</div>
     </div>
   );
 }
